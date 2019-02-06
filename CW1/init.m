@@ -4,9 +4,9 @@ clearvars -except N;
 close all;
 
 % addpaths
-addpath('./internal');
-addpath('./external');
-addpath('./external/libsvm-3.18/matlab');
+addpath('internal');
+addpath('external');
+addpath('external/libsvm-3.18/matlab');
 
 % initialise external libraries
 run('external/vlfeat-0.9.18/toolbox/vl_setup.m'); % vlfeat library

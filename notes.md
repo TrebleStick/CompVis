@@ -122,3 +122,5 @@ Use a committee machine to merge the classifications of the different trees gene
 
 recall the average or products in the committee machine and how it effects the final decision.
 ![](img\commit.png)
+
+## Lecture 3
