@@ -1,4 +1,4 @@
-function [ data_train, data_query ] = getData( MODE )
+function [ data_train, data_query ] = getData( MODE, numBins )
 % Generate training and testing data
 
 % Data Options:
@@ -6,6 +6,7 @@ function [ data_train, data_query ] = getData( MODE )
 %   2. Toy_Spiral
 %   3. Toy_Circle
 %   4. Caltech 101
+
 
 % showImg = 1; % Show training & testing images and their image feature vector (histogram representation)
 showImg = 0; % Don't Show training & testing images and their image feature vector (histogram representation)
@@ -123,40 +124,26 @@ switch MODE
         % Build visual vocabulary (codebook) for 'Bag-of-Words method'
         desc_sel = single(vl_colsubset(cat(2,desc_tr{:}), 10e4)); % Randomly select 100k SIFT descriptors for clustering
         
-        
-         
-%         img0 = cat(2,desc_tr{1});
-%         imshow(transpose(img0))
-%         [x0, x1, x2] = size(img0);
-%         x0 
-%         x1
-%         x2
-    
-        
-%         size(desc_sel)
         % K-means clustering
-        numBins = 256; % for instance,
+%         numBins = 256; % for instance,
         
-%         global desc_sel_trans; %set global to mess with workspace
-%         desc_sel_trans = transpose(desc_sel); 
-%         desc_tr_trans = cat(2,desc_tr{:});
-        
-%         imshow(desc_sel_trans(1:100))
-%         drawnow;
         disp('Performing Kmeans...')
         % write your own codes here
-        [idx_tr, cent_tr] = kmeans(transpose(desc_sel), numBins, 'MaxIter', 1000 );
+        [idx_tr, cent_tr] = kmeans(transpose(desc_sel), numBins, 'MaxIter', 1000);
         
         disp('Encoding Images...')
         % Vector Quantisation
+        data_train_book = cell(10,15);
         data_train = cell(10,15);
-        for i = 1:10
+        
+        parfor i = 1:10
             for j = 1:15
-            data_train{i} = knnsearch(cent_tr, transpose(cat(2,desc_tr{(10*j)+i})));
+                data_train_book{i,j} = knnsearch(cent_tr, transpose(desc_tr{i, j}));
+                data_train{i,j} = cent_tr(data_train_book{i,j},:);
             end
         end
         % write your own codes here
-        % 
+        
         
         % Clear unused varibles to save memory
 %         clearvars desc_tr desc_sel
@@ -201,10 +188,17 @@ switch MODE
 %         end
 
         % Quantisation
-
+        disp('Qu
         % write your own codes here
-        % ...
-        data_query= 0;
+        data_query_book = cell(10,15);
+        data_query = cell(10,15);
+        
+        parfor i = 1:10
+            for j = 1:15
+                data_query_book{i,j} = knnsearch(cent_tr, transpose(desc_te{i, j}));
+                data_query{i,j} = cent_tr(data_query_book{i,j},:);
+            end
+        end
 
     otherwise % Dense point for 2D toy data
         xrange = [-1.5 1.5];
