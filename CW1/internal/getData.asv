@@ -152,7 +152,7 @@ switch MODE
         data_train = cell(10,15);
         for i = 1:10
             for j = 1:15
-            data_train{i,j} = knnsearch(cent_tr, transpose(desc_tr{i, j}));
+            data_train{i} = knnsearch(cent_tr, transpose(cat(2,desc_tr{(10*j)+i})));
             end
         end
         % write your own codes here
