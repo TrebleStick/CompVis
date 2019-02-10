@@ -1,2 +1,0 @@
-for i in {128,256,1024,2048,}
-[data_train,data_test,data_book] = getData('Caltech', 256);
