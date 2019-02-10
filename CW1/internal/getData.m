@@ -1,6 +1,6 @@
 function [ data_train, data_query] = getData( MODE , numBins )
 % Generate training and testing data
-
+rng(21)
 % Data Options:
 %   1. Toy_Gaussian
 %   2. Toy_Spiral
@@ -134,26 +134,15 @@ switch MODE
         disp('Encoding Images...')
         % Vector Quantisation
         data_train = zeros(150,numBins);
-        data_query = cell(10,15);
-%         data_train = cell(150,2);
 %         
         for i = 1:10
             for j = 1:15
                 data_train_tmp = knnsearch(cent_tr, transpose(desc_tr{i, j}));
-%                 data_train{i,j} = cent_tr(data_train_book{i,j},:);
                 [data_train(((i-1)*15)+j, :), ~] = histcounts(data_train_tmp, 1:numBins+1);
-%                 data_train((i*j)+j) = data_train_hist cell(classList(i))];
-                data_query(i,j) = {data_train_tmp};
+
             end
         end
-%         data_train = cell(10,15);
-%         
-%         parfor i = 1:10
-%             for j = 1:15
-%                 data_train{i,j} = [knnsearch(cent_tr, transpose(desc_tr{i, j})), classList(i)];
-% %                 data_train{i,j} = cent_tr(data_train_book{i,j},:);
-%             end
-%         end
+
         % write your own codes here
         % write your own codes here
 
@@ -204,7 +193,7 @@ switch MODE
         disp('Quantising Testing Images...')
         % write your own codes here
 %         data_query_book = cell(10,15);
-%         data_query = cell(10,15);
+        data_query = zeros(150,numBins);
 % 
 %         parfor i = 1:10
 %             for j = 1:15
@@ -213,6 +202,16 @@ switch MODE
 % 
 %             end
 %         end
+
+        for i = 1:10
+            for j = 1:15
+                data_query_tmp = knnsearch(cent_tr, transpose(desc_te{i, j}));
+%                 data_train{i,j} = cent_tr(data_train_book{i,j},:);
+                [data_query(((i-1)*15)+j, :), ~] = histcounts(data_query_tmp, 1:numBins+1);
+%                 data_train((i*j)+j) = data_train_hist cell(classList(i))];
+%                 data_query(i,j) = {data_train_tmp};
+            end
+        end
 %         data_book = cent_tr;
 %           data_query = classList;
 

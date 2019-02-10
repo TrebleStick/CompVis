@@ -1,4 +1,4 @@
-k_values = [128 256 512 1024 2048 4096 8192 16384];
+k_values = [128 256 512 1024 2048 4096 8192 ];
 
 for i = k_values
     [data_train,data_test] = getData('Caltech', i);

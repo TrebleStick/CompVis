@@ -8,15 +8,15 @@ clf
 % end
 
 subplot(2,2,1)
-bar(data_train(1,:))
+histogram(data_train(1), 128)
 
 subplot(2,2,2)
-bar(data_train(23,:))
+histogram(data_train(23), 128)
 
 
 subplot(2,2,3)
-bar(data_train(60,:))
+histogram(data_train{3,8}, 256)
 
 
 subplot(2,2,4)
-bar(data_train(75,:)) 
+histogram(data_train{4,1}, 256) 
