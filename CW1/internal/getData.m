@@ -1,4 +1,4 @@
-function [ data_train, data_query ] = getData( MODE, numBins )
+function [ data_train, data_query] = getData( MODE , numBins )
 % Generate training and testing data
 
 % Data Options:
@@ -129,17 +129,17 @@ switch MODE
         
         disp('Performing Kmeans...')
         % write your own codes here
-        [idx_tr, cent_tr] = kmeans(transpose(desc_sel), numBins, 'MaxIter', 1000);
+        [idx_tr, cent_tr] = kmeans(transpose(desc_sel), numBins, 'MaxIter', 100000, 'Replicates', 5);
         
         disp('Encoding Images...')
         % Vector Quantisation
-        data_train_book = cell(10,15);
+%         data_train_book = cell(10,15);
         data_train = cell(10,15);
         
         parfor i = 1:10
             for j = 1:15
-                data_train_book{i,j} = knnsearch(cent_tr, transpose(desc_tr{i, j}));
-                data_train{i,j} = cent_tr(data_train_book{i,j},:);
+                data_train{i,j} = [single(knnsearch(cent_tr, transpose(desc_tr{i, j}))), classList(i)];
+%                 data_train{i,j} = cent_tr(data_train_book{i,j},:);
             end
         end
         % write your own codes here
@@ -190,15 +190,17 @@ switch MODE
         % Quantisation
         disp('Quantising Testing Images...')
         % write your own codes here
-        data_query_book = cell(10,15);
+%         data_query_book = cell(10,15);
         data_query = cell(10,15);
         
         parfor i = 1:10
             for j = 1:15
-                data_query_book{i,j} = knnsearch(cent_tr, transpose(desc_te{i, j}));
-                data_query{i,j} = cent_tr(data_query_book{i,j},:);
+                data_query{i,j} = [knnsearch(cent_tr, transpose(desc_te{i, j})), classList(i)];
+%                 data_query{i,j} = cent_tr(data_query_book{i,j},:);
+                
             end
         end
+%         data_book = cent_tr;
 
     otherwise % Dense point for 2D toy data
         xrange = [-1.5 1.5];
@@ -206,5 +208,6 @@ switch MODE
         inc = 0.02;
         [x, y] = meshgrid(xrange(1):inc:xrange(2), yrange(1):inc:yrange(2));
         data_query = [x(:) y(:) zeros(length(x)^2,1)];
+        
 end
 end
