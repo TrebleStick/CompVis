@@ -45,7 +45,9 @@ init; clc;
 
 % Select dataset among {'Toy_Gaussian', 'Toy_Spiral', 'Toy_Circle', 'Caltech'}
 
-[data_train, data_test] = getData('Caltech', 256);
+% [data_train, data_test] = getData('Caltech', 256);
+[data_train, data_test] = readCalData(256);
+
 
 %% 2. Random Forest Training
 

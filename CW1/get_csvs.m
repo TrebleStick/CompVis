@@ -1,4 +1,4 @@
-k_values = [128 256 512 1024 2048 4096 8192 16384];
+k_values = [128 256 512 1024 2048];
 
 for i = k_values
     [data_train,data_test] = getData('Caltech', i);
@@ -9,5 +9,3 @@ for i = k_values
     csvwrite(train_name, data_train);
     csvwrite(test_name , data_test );
 end
-% train_name  = strcat('csvs\train_data_', num2str(i), '.csv');
-% csvwrite(train_name, data_train);
