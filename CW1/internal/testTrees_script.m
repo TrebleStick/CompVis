@@ -9,3 +9,5 @@ end
 p_rf = squeeze(sum(p_rf,3))/length(trees); % Regression
 [~,c] = max(p_rf'); % Regression to Classification
 accuracy_rf = sum(c==data_test(:,end)')/length(c); % Classification accuracy (for Caltech dataset)
+
+fprintf('Accuracy : %f \n', accuracy_rf);

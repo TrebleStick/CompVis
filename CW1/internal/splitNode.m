@@ -22,21 +22,44 @@ idx_best = [];
 for n = 1:iter
     
     % Split function - Modify here and try other types of split function
+    switch param.funkySplit
+        case 'axisAligned' 
+            dim = randi(D-1); % Pick one random dimension
+            d_min = single(min(data(:,dim))) + eps; % Find the data range of this dimension
+            d_max = single(max(data(:,dim))) - eps;
+            t = d_min + rand*((d_max-d_min)); % Pick a random value within the range as threshold
+            idx_ = data(:,dim) < t;
     
-    dim = randi(D-1); % Pick one random dimension
-    d_min = single(min(data(:,dim))) + eps; % Find the data range of this dimension
-    d_max = single(max(data(:,dim))) - eps;
-    t = d_min + rand*((d_max-d_min)); % Pick a random value within the range as threshold
-    idx_ = data(:,dim) < t;
+        case 'linear'
+            dim = randi(D-1);
+            d_min1 = single(min(data(:,dim))) + eps; % Find the data range of this dimension
+            d_max1 = single(max(data(:,dim))) - eps;
+            t = d_min1 + rand*((d_max1-d_min1)); % Pick a random value within the range as threshold
+            
+            dim2 = randi(D-1); 
+            d_min2 = single(min(data(:,dim2))) + eps; % Find the data range of this dimension
+            d_max2 = single(max(data(:,dim2))) - eps;
+            t2 = d_min2 + rand*((d_max2-d_min2)); % Pick a random value within the range as threshold
+          
+            theta = rand*2*pi;
+            
+            idx_ = cos(theta)*(data(:,dim)-t) + sin(theta)*(data(:,dim2)-t2) > 0;
+            
+        case 'nonLinear'
+            
+        case 'twoPixelTest'
+        
+    
+    end
     
     ig = getIG(data,idx_); % Calculate information gain
     
-    if visualise
-        visualise_splitfunc(idx_,data,dim,t,ig,n);
-        pause();
-    end
+%     if visualise
+%         visualise_splitfunc(idx_,data,dim,t,ig,n);
+%         pause();
+%     end
     
-    if (sum(idx_) > 0 & sum(~idx_) > 0) % We check that children node are not empty
+    if (sum(idx_) > 0 && sum(~idx_) > 0) % We check that children node are not empty
         [node, ig_best, idx_best] = updateIG(node,ig_best,ig,t,idx_,dim,idx_best);
     end
     
