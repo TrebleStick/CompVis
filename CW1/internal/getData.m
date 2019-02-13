@@ -143,11 +143,7 @@ switch MODE
             end
         end
 
-        % write your own codes here
-        % write your own codes here
-
-
-        % Clear unused varibles to save memory
+        Clear unused varibles to save memory
 %         clearvars desc_tr desc_sel
 end
 
