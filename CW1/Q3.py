@@ -72,8 +72,8 @@ del class_test_patches
 
 
 # Build Model
-clf = RandomForestClassifier(n_estimators=20,
-                             max_depth=32, 
+clf = RandomForestClassifier(n_estimators=7,
+                             max_depth=8,
                              max_features='auto',
                              bootstrap=True,
                              criterion="entropy",
@@ -96,8 +96,23 @@ data_train_transf = list([])
 data_test_transf = list([])
 
 for i in range(150):
-    data_train_transf.append(rf_enc.transform(clf.apply(desc_tr[i].T)).toarray())
-    data_test_transf.append(rf_enc.transform(clf.apply(desc_te[i].T)).toarray())
+    temp_transpose = desc_tr[i].T
+    temp_apply = clf.apply(temp_transpose)
+    del temp_transpose
+    temp_encode = (rf_enc.transform(temp_apply))
+    del temp_apply
+    data_train_transf.append(temp_encode.toarray())
+    del temp_encode
+
+    temp_transpose = desc_te[i].T
+    temp_apply = clf.apply(temp_transpose)
+    del temp_transpose
+    temp_encode = (rf_enc.transform(temp_apply))
+    del temp_apply
+    data_test_transf.append(temp_encode.toarray())
+    del temp_encode
+
+del clf
 
 # Condense to histograms
 data_train = []
@@ -114,17 +129,20 @@ for i in range(150):
         data_test_temp += data_test_transf[i][j]
     data_test.append(data_test_temp)
 
-
+del data_train_temp
+del data_test_temp
+del data_train_transf
+del data_test_transf
 # In[7]:
 
 
-plt.bar(range(320),data_test[110])
+# plt.bar(range(320),data_test[110])
 
 
 # In[8]:
 
 
-plt.bar(range(320),data_train[110])
+# plt.bar(range(320),data_train[110])
 
 
 # In[9]:
