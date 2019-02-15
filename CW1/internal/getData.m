@@ -1,4 +1,4 @@
-function [ data_train, data_query] = getData( MODE , numBins )
+function [ data_train, data_query, time_sift, time_kmeans, time_quant] = getData( MODE , numBins )
 % Generate training and testing data
 rng(21)
 % Data Options:
@@ -93,6 +93,7 @@ switch MODE
             figure('Units','normalized','Position',[.05 .1 .4 .9]);
             suptitle('Training image samples');
         end
+        tic;
         for c = 1:length(classList)
             subFolderName = fullfile(folderName,classList{c});
             imgList = dir(fullfile(subFolderName,'*.jpg'));
@@ -119,7 +120,9 @@ switch MODE
                 [~, desc_tr{c,i}] = vl_phow(single(I),'Sizes',PHOW_Sizes,'Step',PHOW_Step); %  extracts PHOW features (multi-scaled Dense SIFT)
             end
         end
-
+        
+        time_sift = toc;
+        tic;
         disp('Building visual codebook...')
         % Build visual vocabulary (codebook) for 'Bag-of-Words method'
         desc_sel = single(vl_colsubset(cat(2,desc_tr{:}), 10e4)); % Randomly select 100k SIFT descriptors for clustering
@@ -130,9 +133,13 @@ switch MODE
         disp('Performing Kmeans...')
         % write your own codes here
         [~, cent_tr] = kmeans(transpose(desc_sel), numBins, 'MaxIter', 100000, 'Replicates', 5);
-
+        
+        time_kmeans = toc;
+        
         disp('Encoding Images...')
         % Vector Quantisation
+        tic;
+        
         data_train = zeros(150,numBins);
 %         
         for i = 1:10
@@ -142,9 +149,9 @@ switch MODE
 
             end
         end
-
-        Clear unused varibles to save memory
-%         clearvars desc_tr desc_sel
+        time_quant = toc;
+%         Clear unused varibles to save memory
+        clearvars desc_tr desc_sel
 end
 
 switch MODE

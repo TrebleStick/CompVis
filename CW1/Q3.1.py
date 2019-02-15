@@ -67,13 +67,13 @@ del class_test_patches
 
 
 # In[6]:
-for num_trees in [10]:
-    for max_depth in [9]:
+for num_trees in [5, 10]:
+    for max_depth in [6, 9]:
 
         codebook_filename = 'csvs/RF_codebook_train_' + str(num_trees) + '_' + str(max_depth) + '.csv'
         with open(codebook_filename, 'a', newline='') as csvFile:
             writer = csv.writer(csvFile)
-            print('num_trees: %i, max_depth: %i', num_trees, max_depth)
+            print('num_trees & max_depth:', num_trees, max_depth)
             train_start = time.time()
 
             # Build Model
