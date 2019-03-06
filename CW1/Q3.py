@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import time
 
 # In[2]:
-
+print("hello")
 
 # Load SIFT data
 mat_te = scipy.io.loadmat('csvs/desc_te.mat')
