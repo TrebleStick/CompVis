@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import time
 
 # In[2]:
-
+print("hello")
 
 # Load SIFT data
 mat_te = scipy.io.loadmat('csvs/desc_te.mat')
@@ -315,11 +315,8 @@ for numTrees in [1024] :
 
 
 
-# In[10]:
-=======
                         # Classes Predicted
                         predictions = clf.predict(data_test_shuf)
->>>>>>> ff85ae07c093d175635aec06681fe6b76423306b
 
                         # Probability Of Prediction - confidence
                         predict_probs = clf.predict_proba(data_test_shuf)
