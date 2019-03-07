@@ -77,6 +77,13 @@ p_x - p_z(g^{-1}(x)) \ \bigg| \ det\bigg (\frac{\delta g^{-1}(x)}{\delta x} \big
       ###### Variational Autoencoder (VAE)
 
 # LINKS
+#### General
 - https://github.com/soumith/ganhacks
 - https://medium.com/@jonathan_hui/gan-why-it-is-so-hard-to-train-generative-advisory-networks-819a86b3750b
+#### Q1
+- https://www.kaggle.com/vincentman0403/dcgan-on-mnist
+- https://github.com/vwrs/dcgan-mnist
+- https://github.com/rajat503/DCGAN-MNIST
+
+#### Q2
 - https://github.com/znxlwm/tensorflow-MNIST-cGAN-cDCGAN
