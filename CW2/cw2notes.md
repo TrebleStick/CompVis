@@ -75,3 +75,8 @@ p_x - p_z(g^{-1}(x)) \ \bigg| \ det\bigg (\frac{\delta g^{-1}(x)}{\delta x} \big
 - Hard to optomise
 - Practically get good Likelihood but get shitty quality samples.
       ###### Variational Autoencoder (VAE)
+
+# LINKS
+- https://github.com/soumith/ganhacks
+- https://medium.com/@jonathan_hui/gan-why-it-is-so-hard-to-train-generative-advisory-networks-819a86b3750b
+- https://github.com/znxlwm/tensorflow-MNIST-cGAN-cDCGAN
