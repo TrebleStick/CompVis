@@ -1,0 +1,30 @@
+Q2.
+Changes in loss for different hyper-param:
+- Effect of depth
+- Effect of BN 
+- Effect of Ratio
+
+Q3.
+- Inception scores over epochs
+- Inception scores for different architectures
+- Getting crazy inception score
+
+Q4.
+- Supplementing real with extra fake. Different amounts extra
+- Replacing some portion of real with fake. Varying ratio
+- Store validation loss history and plot over each other to show effect
+
+Bonus. 
+- Reversing overfitting and continuing
+- Compared to different ratios on time and inception score 
+
+
+To Do:
+X- Store images from high inception score
+X- Create new graph of best inception scores
+- Compile some graphs for loss comparisons
+- Add graph for inception scores from different techniques (use real data as validation)
+X- Add retraining model with added images, change amount added
+X- Add retraining model with ratio of total images replaced
+-Graph scores of validation history (for each num size overlaying val acc?) (If I show 0,1 1,0 then can show little difference)
+-Do test scores on best validation
