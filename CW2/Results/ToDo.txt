@@ -28,3 +28,4 @@ X- Add retraining model with added images, change amount added
 X- Add retraining model with ratio of total images replaced
 -Graph scores of validation history (for each num size overlaying val acc?) (If I show 0,1 1,0 then can show little difference)
 -Do test scores on best validation
+-Try initialise training with real then fake

@@ -1,2 +1,4 @@
 csvs/*.csv filter=lfs diff=lfs merge=lfs -text
 CW1/csvs/*.csv filter=lfs diff=lfs merge=lfs -text
+CW2/generated_images_47600_0.923000.csv filter=lfs diff=lfs merge=lfs -text
+CW2/generated_labels_47600_0.923000.csv filter=lfs diff=lfs merge=lfs -text
